@@ -1,17 +1,17 @@
 ﻿#include "Payment.h"
 
 Payment::Payment () {
-	FIO = (char*)malloc(24);
-	strcpy(FIO, "Олегченко Олег Олегович");
+	name = (char*)malloc(24);
+	strcpy(name, "Олегченко Олег Олегович");
 	dailySalary = 500;
 	employmentYear = 2012;
 	workedDays = 22;
 	counter++;
 } // Конструктор по умолчанию
 
-Payment::Payment (const char* valueFIO, int valueDailySalary, int valueEmploymentYear, int valueWorkedDays) {
-	FIO = (char*)malloc(strlen(valueFIO));
-	strcpy(FIO, valueFIO);
+Payment::Payment (const char* valueName, int valueDailySalary, int valueEmploymentYear, int valueWorkedDays) {
+	name = (char*)malloc(strlen(valueName));
+	strcpy(name, valueName);
 	dailySalary = valueDailySalary;
 	employmentYear = valueEmploymentYear;
 	workedDays = valueWorkedDays;
@@ -19,17 +19,17 @@ Payment::Payment (const char* valueFIO, int valueDailySalary, int valueEmploymen
 } // Конструктор с параметрами
 
 Payment::Payment (const Payment& name) {
-	FIO = (char*)malloc(strlen(name.FIO));
-	strcpy(FIO, name.FIO);
+	name = (char*)malloc(strlen(name.name));
+	strcpy(name, name.name);
 	dailySalary = name.dailySalary;
 	employmentYear = name.employmentYear;
 	workedDays = name.workedDays;
 	counter++;
 } // Конструктор копирования 
 
-char* Payment::getFIO () {
-	return(Payment::FIO);
-} // Геттер для переменной "FIO"
+char* Payment::getName() {
+	return(Payment::name);
+} // Геттер для переменной "name"
 
 int Payment::getDailySalary () {
 	return(dailySalary);
@@ -55,10 +55,10 @@ float Payment::getIncomeTax () {
 	return(incomeTax);
 } // Геттер для переменной "incomeTax"
 
-void Payment::setFIO(const char* valueFIO) {
-	FIO = (char*)malloc(strlen(valueFIO));
-	strcpy(FIO, valueFIO);
-} // Сеттер для переменной "FIO"
+void Payment::setName(const char* valueName) {
+	name = (char*)malloc(strlen(valueName));
+	strcpy(name, valueName);
+} // Сеттер для переменной "name"
 
 void Payment::setDailySalary(int valueDailySalary) {
 	dailySalary = valueDailySalary;
@@ -97,8 +97,8 @@ void Payment::calculationIncomeTax() {
 } // Функция класса Payment отвечающая за расчет подоходного налога работника 
 
 char* Payment::to_string() {
-	char* stringObj = (char*)malloc(strlen(FIO) + 10000);
-	sprintf(stringObj, "Данные сотрудника: '%s' \n Оклад: %d р. \n Год поступления на работу: %d \n Кол-во отработанных дней в месяце: %d \n Зарплата: %.2f р. \n Отчисления в пенсионный фонд: %.2f р. \n Подоходный налог: %.2f р. \n", FIO, dailySalary, employmentYear, workedDays, salary, pensionContributions, incomeTax);
+	char* stringObj = (char*)malloc(strlen(name) + 10000);
+	sprintf(stringObj, "Данные сотрудника: '%s' \n Оклад: %d р. \n Год поступления на работу: %d \n Кол-во отработанных дней в месяце: %d \n Зарплата: %.2f р. \n Отчисления в пенсионный фонд: %.2f р. \n Подоходный налог: %.2f р. \n", name, dailySalary, employmentYear, workedDays, salary, pensionContributions, incomeTax);
 	return (stringObj);
 } // Функция класса Payment отвечающая за строковое представление объекта
 

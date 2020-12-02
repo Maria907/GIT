@@ -8,7 +8,7 @@ class Payment {
 public:
 
 	Payment (); // Объявление конструктора по умолчанию
-	Payment (const char* valueFIO, int valueDailySalary, int valueEmploymentYear, int valueWorkedDays); // Объявление конструктора с параметрами
+	Payment (const char* valueName, int valueDailySalary, int valueEmploymentYear, int valueWorkedDays); // Объявление конструктора с параметрами
 	Payment (const Payment& name); // Объявление конструктора копирования 
 
 	void calculationSalary (); // Объявление функции отвечающей за расчет зарплаты работника
@@ -17,7 +17,7 @@ public:
 
 	char* to_string (); // Объявление функции отвечающей за строковое представление объекта
 
-	char* getFIO (); // Объявление геттера для переменной "FIO"
+	char* getName(); // Объявление геттера для переменной "name"
 	int getDailySalary (); // Объявление геттера для переменной "dailySalary"
 	int getEmploymentYear (); // Объявление геттера для переменной "employmentYear"
 	int getWorkedDays (); // Объявление геттера для переменной "workedDays"
@@ -25,7 +25,7 @@ public:
 	float getPensionContributions (); // Объявление геттера для переменной "pensionContributions"
 	float getIncomeTax (); // Объявление геттера для переменной "incomeTax"
 
-	void setFIO (const char* valueFIO); // Объявление сеттера для переменной "FIO"
+	void setName(const char* valueName); // Объявление сеттера для переменной "name"
 	void setDailySalary (int valueDailySalary); // Объявление сеттера для переменной "dailySalary"
 	void setEmploymentYear (int valueEmploymentYear); // Объявление сеттера для переменной "employmentYear"
 	void setWorkedDays (int valueWorkedDays); // Объявление сеттера для переменной "workedDays"
@@ -35,8 +35,12 @@ public:
 
 	static int counter; // Объявление статического члена класса - счетчика 
 
+	void testSalary();
+	void testPensionContributions();
+	void testIncomeTax();
+
 private:
-	char* FIO; // Объявление переменной, содержащей ФИО работника
+	char* name; // Объявление переменной, содержащей ФИО работника
 	int dailySalary; // Объявление переменной, содержащей оклад работника
 	int employmentYear; // Объявление переменной, содержащей год принятия работника 
 	int workedDays; // Объявление переменной, содержащей отработанные работником дни за месяц 

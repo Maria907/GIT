@@ -27,6 +27,10 @@ int main() {
 	cout << anton2.to_string();
 	cout << endl;
 
+	oleg.testSalary();  // Тест функции отвечающей за расчет зарплаты работника пройден
+	oleg.testPensionContributions(); // Тест функции отвечающей за расчет пенсионных вычетов работника пройден
+	oleg.testIncomeTax();  // Тест функции отвечающей за расчет подоходного налога работ пройден
+
 	cin.get();
 	cin.get();
 }
