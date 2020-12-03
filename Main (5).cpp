@@ -9,22 +9,37 @@ int main() {
 
 	Payment anton2(anton); // Создания объекта "anton2" используя конструктор копирования
 
+	Payment anton3(anton); // Создания объекта "anton2" используя конструктор копирования
+
 	oleg.calculationSalary();
 	oleg.calculationPensionContributions();
 	oleg.calculationIncomeTax();
-	cout << oleg.toString();
+	cout << toString(oleg);
+	cout << oleg();
 	cout << endl;
 
 	anton.calculationSalary();
 	anton.calculationPensionContributions();
 	anton.calculationIncomeTax();
-	cout << anton.toString();
+	cout << toString(anton);
+	cout << anton();
 	cout << endl;
 
+	anton2++;
+	anton2++;
+	anton2--;
+	anton2 - 400;
+	anton2 + 36;
 	anton2.calculationSalary();
 	anton2.calculationPensionContributions();
 	anton2.calculationIncomeTax();
-	cout << anton2.toString();
+	cout << toString(anton2);
+	cout << anton2();
+	cout << endl;
+
+	anton3 = anton;
+	cout << toString(anton3);
+	cout << anton3();
 	cout << endl;
 
 	allTests();

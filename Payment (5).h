@@ -2,21 +2,19 @@
 #define _CRT_SECURE_NO_WARNINGS 
 #include <iostream> 
 #include <assert.h>
-#include "Test.h"
 using namespace std;
 
 class Payment {
 public:
-
-	Payment (); // Объявление конструктора по умолчанию
-	Payment (const char* valueName, int valueDailySalary, int valueEmploymentYear, int valueWorkedDays); // Объявление конструктора с параметрами
-	Payment (const Payment& name); // Объявление конструктора копирования 
+	Payment(); // Объявление конструктора по умолчанию
+	Payment(const char* valueName, int valueDailySalary, int valueEmploymentYear, int valueWorkedDays); // Объявление конструктора с параметрами
+	Payment(const Payment& person); // Объявление конструктора копирования 
 
 	void calculationSalary (); // Объявление функции отвечающей за расчет зарплаты работника
 	void calculationPensionContributions (); // Объявление функции отвечающей за расчет пенсионных вычетов работника
 	void calculationIncomeTax (); // Объявление функции отвечающей за расчет подоходного налога работника
 
-	char* toString (); // Объявление функции отвечающей за строковое представление объекта
+	friend char* toString(const Payment&); // Объявление функции отвечающей за строковое представление объекта
 
 	char* getName(); // Объявление геттера для переменной "name"
 	int getDailySalary (); // Объявление геттера для переменной "dailySalary"
@@ -34,6 +32,17 @@ public:
 	void setPensionContributions (float valuePensionContributions); // Объявление сеттера для переменной "pensionContributions"
 	void setIncomeTax (float valueIncomeTax); // Объявление сеттера для переменной "incomeTax"
 
+	void operator - (int b);
+	void operator + (int b);
+	void operator -- (int);
+	void operator ++ (int);
+
+	bool operator == (Payment&);
+
+	Payment operator = (const Payment&);
+
+	char* operator() ();
+
 	static int counter; // Объявление статического члена класса - счетчика 
 
 private:
@@ -46,3 +55,16 @@ private:
 	float incomeTax; // Объявление переменной, содержащей подоходный налог работника
 }; // Объявление класса Payment
 
+void testSalary();
+void testPensionContributions();
+void testIncomeTax();
+void testToString();
+
+void testAddition();
+void testSubtraction();
+void testIncrement();
+void testDecrement();
+void testFinalSalary();
+void testAssignment();
+
+void allTests();

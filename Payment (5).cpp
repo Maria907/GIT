@@ -24,6 +24,9 @@ Payment::Payment (const Payment& person) {
 	dailySalary = person.dailySalary;
 	employmentYear = person.employmentYear;
 	workedDays = person.workedDays;
+	salary = person.salary;
+	pensionContributions = person.pensionContributions;
+	incomeTax = person.incomeTax;
 	counter++;
 } // Конструктор копирования 
 
@@ -96,10 +99,47 @@ void Payment::calculationIncomeTax() {
 	incomeTax = salary * 0.13;
 } // Функция класса Payment отвечающая за расчет подоходного налога работника 
 
-char* Payment::toString() {
-	char* stringObj = (char*)malloc(strlen(name) + 10000);
-	sprintf(stringObj, "Данные сотрудника: '%s' \n Оклад: %d р. \n Год поступления на работу: %d \n Кол-во отработанных дней в месяце: %d \n Зарплата: %.2f р. \n Отчисления в пенсионный фонд: %.2f р. \n Подоходный налог: %.2f р. \n", name, dailySalary, employmentYear, workedDays, salary, pensionContributions, incomeTax);
+char* toString(const Payment& person) {
+	char* stringObj = (char*)malloc(strlen(person.name) + 10000);
+	sprintf(stringObj, "Данные сотрудника: '%s' \n Оклад: %d р. \n Год поступления на работу: %d \n Кол-во отработанных дней в месяце: %d \n Зарплата: %.2f р. \n Отчисления в пенсионный фонд: %.2f р. \n Подоходный налог: %.2f р. \n", person.name, person.dailySalary, person.employmentYear, person.workedDays, person.salary, person.pensionContributions, person.incomeTax);
 	return (stringObj);
 } // Функция класса Payment отвечающая за строковое представление объекта
+
+char* Payment::operator() () {
+	char* finalSalary = (char*)malloc(10000);
+	sprintf(finalSalary, " Зарплата с вычетом всех процентов: %.2f р. \n", salary - pensionContributions - incomeTax);
+	return (finalSalary);
+} 
+
+void Payment::operator - (int b) {
+	this->dailySalary = this->dailySalary - b;
+}
+
+void Payment::operator + (int b) {
+	this->dailySalary = this->dailySalary + b;
+}
+
+void Payment::operator -- (int) {
+	this->employmentYear = this->employmentYear - 1;
+}
+
+void Payment::operator ++ (int) {
+	this->employmentYear = this->employmentYear + 1;
+}
+
+bool Payment::operator == (Payment& person) {
+	return (strcmp(this->name, person.name) == 0 && this->dailySalary == person.dailySalary && this->employmentYear == person.employmentYear && this->workedDays == person.workedDays && this->salary == person.salary && this->pensionContributions == person.pensionContributions && this->incomeTax == person.incomeTax);
+}
+
+Payment Payment::operator = ( const Payment& person) {
+	strcpy(name, person.name);
+	dailySalary = person.dailySalary;
+	employmentYear = person.employmentYear;
+	workedDays = person.workedDays;
+	salary = person.salary;
+	pensionContributions = person.pensionContributions;
+	incomeTax = person.incomeTax;
+	return *this;
+}
 
 int Payment::counter = 0; // Инициализация статического члена класса 
