@@ -12,24 +12,22 @@ int main() {
 	oleg.calculationSalary();
 	oleg.calculationPensionContributions();
 	oleg.calculationIncomeTax();
-	cout << oleg.to_string();
+	cout << oleg.toString();
 	cout << endl;
 
 	anton.calculationSalary();
 	anton.calculationPensionContributions();
 	anton.calculationIncomeTax();
-	cout << anton.to_string();
+	cout << anton.toString();
 	cout << endl;
 
 	anton2.calculationSalary();
 	anton2.calculationPensionContributions();
 	anton2.calculationIncomeTax();
-	cout << anton2.to_string();
+	cout << anton2.toString();
 	cout << endl;
 
-	oleg.testSalary();  // Тест функции отвечающей за расчет зарплаты работника пройден
-	oleg.testPensionContributions(); // Тест функции отвечающей за расчет пенсионных вычетов работника пройден
-	oleg.testIncomeTax();  // Тест функции отвечающей за расчет подоходного налога работ пройден
+	allTests();
 
 	cin.get();
 	cin.get();

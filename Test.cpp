@@ -1,30 +1,36 @@
 ﻿#include "Payment.h"
 
-void Payment::testSalary() {
-	setDailySalary(5);
-	setWorkedDays(10);
-	calculationSalary();
-	assert(getSalary() == getDailySalary() * getWorkedDays()); 
+void testSalary () {
+	Payment test("Тестевский Тест Тестович", 5, 1, 10);
+	test.calculationSalary();
+	assert(test.getSalary() == test.getDailySalary() * test.getWorkedDays());
 }
 
-void Payment::testPensionContributions() {
-	setDailySalary(5);
-	setWorkedDays(10);
-	calculationSalary();
-	calculationPensionContributions();
-	assert(getPensionContributions() == getSalary() * 0.01); 
+void testPensionContributions () {
+	Payment test("Тестевский Тест Тестович", 5, 1, 10);
+	test.calculationSalary();
+	test.calculationPensionContributions();
+	assert(test.getPensionContributions() == test.getSalary() * 0.01);
 }
 
-void Payment::testIncomeTax() {
-	setDailySalary(5);
-	setWorkedDays(10);
-	calculationSalary();
-	calculationIncomeTax();
-	assert(getIncomeTax() == getSalary() * 0.13); 
+void testIncomeTax () {
+	Payment test("Тестевский Тест Тестович", 5, 1, 10);
+	test.calculationSalary();
+	test.calculationIncomeTax();
+	assert(test.getIncomeTax() == test.getSalary() * 0.13);
 }
 
+void testToString() {
+	Payment test("Тестевский Тест Тестович", 5, 1, 10);
+	test.calculationSalary();
+	test.calculationIncomeTax();
+	test.calculationPensionContributions();
+	assert(strcmp(test.toString(),"Данные сотрудника: 'Тестевский Тест Тестович' \n Оклад: 5 р. \n Год поступления на работу: 1 \n Кол-во отработанных дней в месяце: 10 \n Зарплата: 50,00 р. \n Отчисления в пенсионный фонд: 0,50 р. \n Подоходный налог: 6,50 р. \n") == 0);
+}
 
-
-
-
-	
+void allTests() {
+	testSalary();
+	testPensionContributions();
+	testIncomeTax();
+	testToString();
+}

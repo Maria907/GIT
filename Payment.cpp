@@ -2,10 +2,10 @@
 
 Payment::Payment () {
 	name = (char*)malloc(24);
-	strcpy(name, "Олегченко Олег Олегович");
-	dailySalary = 500;
-	employmentYear = 2012;
-	workedDays = 22;
+	strcpy(name, " ");
+	dailySalary = 0;
+	employmentYear = 0;
+	workedDays = 0;
 	counter++;
 } // Конструктор по умолчанию
 
@@ -18,12 +18,12 @@ Payment::Payment (const char* valueName, int valueDailySalary, int valueEmployme
 	counter++;
 } // Конструктор с параметрами
 
-Payment::Payment (const Payment& name) {
-	name = (char*)malloc(strlen(name.name));
-	strcpy(name, name.name);
-	dailySalary = name.dailySalary;
-	employmentYear = name.employmentYear;
-	workedDays = name.workedDays;
+Payment::Payment (const Payment& person) {
+	name = (char*)malloc(strlen(person.name));
+	strcpy(name, person.name);
+	dailySalary = person.dailySalary;
+	employmentYear = person.employmentYear;
+	workedDays = person.workedDays;
 	counter++;
 } // Конструктор копирования 
 
@@ -96,7 +96,7 @@ void Payment::calculationIncomeTax() {
 	incomeTax = salary * 0.13;
 } // Функция класса Payment отвечающая за расчет подоходного налога работника 
 
-char* Payment::to_string() {
+char* Payment::toString() {
 	char* stringObj = (char*)malloc(strlen(name) + 10000);
 	sprintf(stringObj, "Данные сотрудника: '%s' \n Оклад: %d р. \n Год поступления на работу: %d \n Кол-во отработанных дней в месяце: %d \n Зарплата: %.2f р. \n Отчисления в пенсионный фонд: %.2f р. \n Подоходный налог: %.2f р. \n", name, dailySalary, employmentYear, workedDays, salary, pensionContributions, incomeTax);
 	return (stringObj);

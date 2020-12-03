@@ -15,7 +15,7 @@ public:
 	void calculationPensionContributions (); // Объявление функции отвечающей за расчет пенсионных вычетов работника
 	void calculationIncomeTax (); // Объявление функции отвечающей за расчет подоходного налога работника
 
-	char* to_string (); // Объявление функции отвечающей за строковое представление объекта
+	char* toString (); // Объявление функции отвечающей за строковое представление объекта
 
 	char* getName(); // Объявление геттера для переменной "name"
 	int getDailySalary (); // Объявление геттера для переменной "dailySalary"
@@ -35,10 +35,6 @@ public:
 
 	static int counter; // Объявление статического члена класса - счетчика 
 
-	void testSalary();
-	void testPensionContributions();
-	void testIncomeTax();
-
 private:
 	char* name; // Объявление переменной, содержащей ФИО работника
 	int dailySalary; // Объявление переменной, содержащей оклад работника
@@ -48,3 +44,9 @@ private:
 	float pensionContributions; // Объявление переменной, содержащей пенсионный вычет работника
 	float incomeTax; // Объявление переменной, содержащей подоходный налог работника
 }; // Объявление класса Payment
+
+void testSalary();
+void testPensionContributions();
+void testIncomeTax();
+void testToString();
+void allTests();
