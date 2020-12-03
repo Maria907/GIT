@@ -2,6 +2,7 @@
 #define _CRT_SECURE_NO_WARNINGS 
 #include <iostream> 
 #include <assert.h>
+#include "Test.h"
 using namespace std;
 
 class Payment {
@@ -55,16 +56,3 @@ private:
 	float incomeTax; // Объявление переменной, содержащей подоходный налог работника
 }; // Объявление класса Payment
 
-void testSalary();
-void testPensionContributions();
-void testIncomeTax();
-void testToString();
-
-void testAddition();
-void testSubtraction();
-void testIncrement();
-void testDecrement();
-void testFinalSalary();
-void testAssignment();
-
-void allTests();
