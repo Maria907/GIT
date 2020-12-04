@@ -18,6 +18,10 @@ int main() {
 	cout << oleg();
 	cout << endl;
 
+	
+	--anton;
+	--anton;
+	--anton;
 	anton.calculationSalary();
 	anton.calculationPensionContributions();
 	anton.calculationIncomeTax();
@@ -41,7 +45,7 @@ int main() {
 	cout << toString(anton3);
 	cout << anton3();
 	cout << endl;
-
+	
 	allTests();
 
 	cin.get();

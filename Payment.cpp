@@ -4,7 +4,7 @@ Payment::Payment () {
 	name = (char*)malloc(24);
 	strcpy(name, " ");
 	dailySalary = 0;
-	employmentYear = 0;
+	employmentYear = 0;	
 	workedDays = 0;
 	counter++;
 } // Конструктор по умолчанию
@@ -111,24 +111,38 @@ char* Payment::operator() () {
 	return (finalSalary);
 } 
 
-void Payment::operator - (int b) {
+Payment& Payment::operator - (int b) {
 	this->dailySalary = this->dailySalary - b;
+	return *this;
 }
 
-void Payment::operator + (int b) {
+Payment& Payment::operator + (int b) {
 	this->dailySalary = this->dailySalary + b;
+	return *this;
 }
 
-void Payment::operator -- (int) {
+Payment& Payment::operator -- (int) {
 	this->employmentYear = this->employmentYear - 1;
+	return *this;
 }
 
-void Payment::operator ++ (int) {
+Payment& Payment::operator ++ (int) {
 	this->employmentYear = this->employmentYear + 1;
+	return *this;
 }
 
-bool Payment::operator == (Payment& person) {
-	return (strcmp(this->name, person.name) == 0 && this->dailySalary == person.dailySalary && this->employmentYear == person.employmentYear && this->workedDays == person.workedDays && this->salary == person.salary && this->pensionContributions == person.pensionContributions && this->incomeTax == person.incomeTax);
+Payment& Payment::operator -- () {
+	this->employmentYear = this->employmentYear - 1;
+	return *this;
+}
+
+Payment& Payment::operator ++ () {
+	this->employmentYear = this->employmentYear + 1;
+	return *this;
+}
+
+bool operator == (Payment& person1, Payment& person2) {
+	return (strcmp(person1.name, person2.name) == 0 && person1.dailySalary == person2.dailySalary && person1.employmentYear == person2.employmentYear && person1.workedDays == person2.workedDays && person1.salary == person2.salary && person1.pensionContributions == person2.pensionContributions && person1.incomeTax == person2.incomeTax);
 }
 
 Payment Payment::operator = ( const Payment& person) {

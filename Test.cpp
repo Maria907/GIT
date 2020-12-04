@@ -44,11 +44,17 @@ void testIncrement() {
 	Payment test("Тестевский Тест Тестович", 5, 1, 10);
 	test++;
 	assert(test.getEmploymentYear() == 2);
+
+	++test;
+	assert(test.getEmploymentYear() == 3);
 }
 void testDecrement() {
 	Payment test("Тестевский Тест Тестович", 5, 3, 10);
 	test--;
 	assert(test.getEmploymentYear() == 2);
+
+	--test;
+	assert(test.getEmploymentYear() == 1);
 }
 
 void testFinalSalary() {

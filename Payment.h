@@ -33,12 +33,14 @@ public:
 	void setPensionContributions (float valuePensionContributions); // Объявление сеттера для переменной "pensionContributions"
 	void setIncomeTax (float valueIncomeTax); // Объявление сеттера для переменной "incomeTax"
 
-	void operator - (int b);
-	void operator + (int b);
-	void operator -- (int);
-	void operator ++ (int);
+	Payment& operator - (int b);
+	Payment& operator + (int b);
+	Payment& operator -- (int);
+	Payment& operator ++ (int);
+	Payment& operator -- ();
+	Payment& operator ++ ();
 
-	bool operator == (Payment&);
+	friend bool operator == (Payment&, Payment&);
 
 	Payment operator = (const Payment&);
 
