@@ -18,7 +18,6 @@ int main() {
 	cout << oleg();
 	cout << endl;
 
-	
 	--anton;
 	--anton;
 	--anton;

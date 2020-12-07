@@ -1,7 +1,7 @@
 ﻿#include "Payment.h"
 
 Payment::Payment () {
-	name = (char*)malloc(24);
+	name = new char[2];
 	strcpy(name, " ");
 	dailySalary = 0;
 	employmentYear = 0;	
@@ -10,7 +10,7 @@ Payment::Payment () {
 } // Конструктор по умолчанию
 
 Payment::Payment (const char* valueName, int valueDailySalary, int valueEmploymentYear, int valueWorkedDays) {
-	name = (char*)malloc(strlen(valueName));
+	name = new char[strlen(valueName) + 1];
 	strcpy(name, valueName);
 	dailySalary = valueDailySalary;
 	employmentYear = valueEmploymentYear;
@@ -19,7 +19,7 @@ Payment::Payment (const char* valueName, int valueDailySalary, int valueEmployme
 } // Конструктор с параметрами
 
 Payment::Payment (const Payment& person) {
-	name = (char*)malloc(strlen(person.name));
+	name = new char[strlen(person.name) + 1];
 	strcpy(name, person.name);
 	dailySalary = person.dailySalary;
 	employmentYear = person.employmentYear;
@@ -29,6 +29,10 @@ Payment::Payment (const Payment& person) {
 	incomeTax = person.incomeTax;
 	counter++;
 } // Конструктор копирования 
+
+Payment::~Payment() {
+	delete[] name;
+}
 
 char* Payment::getName() {
 	return(Payment::name);
@@ -59,7 +63,8 @@ float Payment::getIncomeTax () {
 } // Геттер для переменной "incomeTax"
 
 void Payment::setName(const char* valueName) {
-	name = (char*)malloc(strlen(valueName));
+	delete[] name;
+	name = new char[strlen(valueName) + 1];
 	strcpy(name, valueName);
 } // Сеттер для переменной "name"
 
@@ -100,13 +105,27 @@ void Payment::calculationIncomeTax() {
 } // Функция класса Payment отвечающая за расчет подоходного налога работника 
 
 char* toString(const Payment& person) {
-	char* stringObj = (char*)malloc(strlen(person.name) + 10000);
-	sprintf(stringObj, "Данные сотрудника: '%s' \n Оклад: %d р. \n Год поступления на работу: %d \n Кол-во отработанных дней в месяце: %d \n Зарплата: %.2f р. \n Отчисления в пенсионный фонд: %.2f р. \n Подоходный налог: %.2f р. \n", person.name, person.dailySalary, person.employmentYear, person.workedDays, person.salary, person.pensionContributions, person.incomeTax);
+	char* stringObj = new char[strlen(person.name) 
+		+ sizeof(person.dailySalary)
+		+ sizeof(person.employmentYear) 
+		+ sizeof(person.workedDays) 
+		+ sizeof(person.salary) 
+		+ sizeof(person.pensionContributions)
+		+ sizeof(person.incomeTax) 
+		+ 202];
+	sprintf(stringObj, "Данные сотрудника: '%s' \n Оклад: %d р. \n Год поступления на работу: %d \n Кол-во отработанных дней в месяце: %d \n Зарплата: %.2f р. \n Отчисления в пенсионный фонд: %.2f р. \n Подоходный налог: %.2f р. \n", 
+		person.name, 
+		person.dailySalary, 
+		person.employmentYear, 
+		person.workedDays, 
+		person.salary, 
+		person.pensionContributions, 
+		person.incomeTax);
 	return (stringObj);
 } // Функция класса Payment отвечающая за строковое представление объекта
 
 char* Payment::operator() () {
-	char* finalSalary = (char*)malloc(10000);
+	char* finalSalary = new char[sizeof(salary) + 47];
 	sprintf(finalSalary, " Зарплата с вычетом всех процентов: %.2f р. \n", salary - pensionContributions - incomeTax);
 	return (finalSalary);
 } 
@@ -121,32 +140,48 @@ Payment& Payment::operator + (int b) {
 	return *this;
 }
 
-Payment& Payment::operator -- (int) {
-	this->employmentYear = this->employmentYear - 1;
-	return *this;
-}
-
-Payment& Payment::operator ++ (int) {
-	this->employmentYear = this->employmentYear + 1;
-	return *this;
-}
-
 Payment& Payment::operator -- () {
-	this->employmentYear = this->employmentYear - 1;
+	--employmentYear;
 	return *this;
 }
 
 Payment& Payment::operator ++ () {
-	this->employmentYear = this->employmentYear + 1;
+	++employmentYear;
 	return *this;
 }
 
-bool operator == (Payment& person1, Payment& person2) {
-	return (strcmp(person1.name, person2.name) == 0 && person1.dailySalary == person2.dailySalary && person1.employmentYear == person2.employmentYear && person1.workedDays == person2.workedDays && person1.salary == person2.salary && person1.pensionContributions == person2.pensionContributions && person1.incomeTax == person2.incomeTax);
+Payment& Payment::operator -- (int) {
+	Payment temp(*this);
+	employmentYear--;
+	return temp;
 }
 
-Payment Payment::operator = ( const Payment& person) {
-	strcpy(name, person.name);
+Payment& Payment::operator ++ (int) {
+	Payment temp(*this);
+	employmentYear++;
+	return temp;
+}
+
+bool operator == (Payment& person1, Payment& person2) {
+	return (strcmp(person1.name, person2.name) == 0 
+		&& person1.dailySalary == person2.dailySalary 
+		&& person1.employmentYear == person2.employmentYear 
+		&& person1.workedDays == person2.workedDays 
+		&& person1.salary == person2.salary 
+		&& person1.pensionContributions == person2.pensionContributions 
+		&& person1.incomeTax == person2.incomeTax);
+}
+
+bool operator != (Payment& person1, Payment& person2) {
+	return !(person1==person2);
+}
+
+Payment Payment::operator = (const Payment& person) {
+	if (strcmp(name, person.name) != 0) {
+		delete[] name;
+		name = new char[strlen(person.name)+1];
+		strcpy(name, person.name);
+	}
 	dailySalary = person.dailySalary;
 	employmentYear = person.employmentYear;
 	workedDays = person.workedDays;

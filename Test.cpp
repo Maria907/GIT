@@ -62,7 +62,7 @@ void testFinalSalary() {
 	test.calculationSalary();
 	test.calculationIncomeTax();
 	test.calculationPensionContributions();
-	assert(strcmp(test(), " Зарплата с вычетом всех процентов: 43,00 р. \n") == 0); // Тест перегруженного оператора <= (случай, когда <)комплексных чисел пройден
+	assert(strcmp(test(), " Зарплата с вычетом всех процентов: 43,00 р. \n") == 0); 
 }
 
 void testAssignment() {

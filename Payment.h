@@ -10,6 +10,7 @@ public:
 	Payment(); // Объявление конструктора по умолчанию
 	Payment(const char* valueName, int valueDailySalary, int valueEmploymentYear, int valueWorkedDays); // Объявление конструктора с параметрами
 	Payment(const Payment& person); // Объявление конструктора копирования 
+	~Payment();
 
 	void calculationSalary (); // Объявление функции отвечающей за расчет зарплаты работника
 	void calculationPensionContributions (); // Объявление функции отвечающей за расчет пенсионных вычетов работника
@@ -41,6 +42,7 @@ public:
 	Payment& operator ++ ();
 
 	friend bool operator == (Payment&, Payment&);
+	friend bool operator != (Payment&, Payment&);
 
 	Payment operator = (const Payment&);
 
