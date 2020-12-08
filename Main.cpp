@@ -3,49 +3,48 @@
 int main() {
 	setlocale(LC_ALL, "Russian");
 
-	Payment oleg; // Создания объекта "oleg" используя конструктор по умолчанию
+	Payment person1("Olegchenko Oleg Olegovich", 300, 2015, 22), person2;
+    person1.calculationSalary();
+    person1.calculationPensionContributions();
+    person1.calculationIncomeTax();
 
-	Payment anton ("Антоничевский Антон Антонович", 450, 2014, 22); // Создания объекта "anton" используя конструктор с параметрами
 
-	Payment anton2(anton); // Создания объекта "anton2" используя конструктор копирования
+    ofstream save("test.txt", ios_base::app);
+    if (save.is_open()) {
+        save << person1.getName() << endl
+            << person1.getDailySalary() << endl
+            << person1.getEmploymentYear() << endl
+            << person1.getWorkedDays() << endl;
+        save.close();
+    }
 
-	Payment anton3(anton); // Создания объекта "anton2" используя конструктор копирования
+    ifstream load("test.txt", ios_base::in);
+    if (load.is_open()) {
+        load >> person2;
+        load.close();
+        person2.calculationSalary();
+        person2.calculationPensionContributions();
+        person2.calculationIncomeTax();
+        cout << person2 << endl;
+    }
 
-	oleg.calculationSalary();
-	oleg.calculationPensionContributions();
-	oleg.calculationIncomeTax();
-	cout << toString(oleg);
-	cout << oleg();
-	cout << endl;
+    ofstream saveB("testBinary.txt", ios_base::binary);
+    person1.binarySave(saveB);
 
-	--anton;
-	--anton;
-	--anton;
-	anton.calculationSalary();
-	anton.calculationPensionContributions();
-	anton.calculationIncomeTax();
-	cout << toString(anton);
-	cout << anton();
-	cout << endl;
+    ifstream loadB("testBinary.txt", ios_base::binary);
+    person2.binaryLoad(loadB);
+    cout << person2 << endl;
 
-	anton2++;
-	anton2++;
-	anton2--;
-	anton2 - 400;
-	anton2 + 36;
-	anton2.calculationSalary();
-	anton2.calculationPensionContributions();
-	anton2.calculationIncomeTax();
-	cout << toString(anton2);
-	cout << anton2();
-	cout << endl;
+    fstream clearFile("test.txt", ios::out);
+    clearFile.close();
 
-	anton3 = anton;
-	cout << toString(anton3);
-	cout << anton3();
-	cout << endl;
-	
-	allTests();
+    fstream clearFileB("testBinary.txt", ios::out);
+    clearFileB.close();
+
+	//allTests();
+
+    person1;
+    person2;
 
 	cin.get();
 	cin.get();

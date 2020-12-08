@@ -2,6 +2,7 @@
 #define _CRT_SECURE_NO_WARNINGS 
 #include <iostream> 
 #include <assert.h>
+#include <fstream>
 #include "Test.h"
 using namespace std;
 
@@ -49,6 +50,12 @@ public:
 	char* operator() ();
 
 	static int counter; // Объявление статического члена класса - счетчика 
+
+	friend ostream& operator << (ostream&, const Payment&);
+	friend istream& operator >> (istream&, Payment&);
+
+	void binarySave(ofstream&);
+	void binaryLoad(ifstream&);
 
 private:
 	char* name; // Объявление переменной, содержащей ФИО работника

@@ -191,4 +191,43 @@ Payment Payment::operator = (const Payment& person) {
 	return *this;
 }
 
+ostream& operator << (ostream& out, const Payment& person) {
+	out << "Данные сотрудника: " << person.name << endl
+		<< " Оклад: " << person.dailySalary << " р." << endl
+		<< " Год поступления на работу: " << person.employmentYear << endl
+		<< " Кол-во отработанных дней в месяце: " << person.workedDays << endl
+		<< " Зарплата: " << person.salary << " р." << endl
+		<< " Отчисления в пенсионный фонд: " << person.pensionContributions << " р." << endl
+		<< " Подоходный налог: " << person.incomeTax << " р." << endl;
+	return out;
+} // Перегруженная функция вывода комплексных чисел
+
+istream& operator >> (istream& in, Payment& person) {
+	delete[] person.name;
+	person.name = new char[255];
+	in.getline(person.name, 255);
+	in >> person.dailySalary; 
+	in >> person.employmentYear; 
+	in >> person.workedDays;
+	return in;
+} // Перегруженная функция ввода комплексных чисел
+
+void Payment::binarySave(ofstream& save) {
+	if (save.is_open()) {
+		save.write((char*)this, sizeof(*this));
+		save.close();
+	}
+}
+
+void Payment::binaryLoad(ifstream& load) {
+	delete[] name;
+	name = new char[255];
+	if (load.is_open()) {
+		load.read((char*)this, sizeof(*this));
+		load.close();
+	}
+}
+
 int Payment::counter = 0; // Инициализация статического члена класса 
+
+
