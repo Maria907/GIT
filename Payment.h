@@ -17,7 +17,7 @@ public:
 	void calculationPensionContributions (); // Объявление функции отвечающей за расчет пенсионных вычетов работника
 	void calculationIncomeTax (); // Объявление функции отвечающей за расчет подоходного налога работника
 
-	friend char* toString(const Payment&); // Объявление функции отвечающей за строковое представление объекта
+	char* toString(); // Объявление функции отвечающей за строковое представление объекта
 
 	char* getName(); // Объявление геттера для переменной "name"
 	int getDailySalary (); // Объявление геттера для переменной "dailySalary"
@@ -42,8 +42,8 @@ public:
 	Payment& operator -- ();
 	Payment& operator ++ ();
 
-	friend bool operator == (Payment&, Payment&);
-	friend bool operator != (Payment&, Payment&);
+	friend bool operator == (Payment& person1, Payment& person2);
+	friend bool operator != (Payment& person1, Payment& person2);
 
 	Payment operator = (const Payment&);
 
@@ -51,11 +51,13 @@ public:
 
 	static int counter; // Объявление статического члена класса - счетчика 
 
-	friend ostream& operator << (ostream&, const Payment&);
-	friend istream& operator >> (istream&, Payment&);
+	friend ostream& operator << (ostream& out, const Payment& person);
+	friend istream& operator >> (istream& in, Payment& person);
 
-	void binarySave(ofstream&);
-	void binaryLoad(ifstream&);
+	friend ofstream& operator << (ofstream& out, const Payment& person);
+
+	void binarySave(ofstream& save);
+	void binaryLoad(ifstream& load);
 
 private:
 	char* name; // Объявление переменной, содержащей ФИО работника

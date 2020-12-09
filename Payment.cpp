@@ -63,7 +63,7 @@ float Payment::getIncomeTax () {
 } // Геттер для переменной "incomeTax"
 
 void Payment::setName(const char* valueName) {
-	delete[] name;
+	delete name;
 	name = new char[strlen(valueName) + 1];
 	strcpy(name, valueName);
 } // Сеттер для переменной "name"
@@ -104,23 +104,17 @@ void Payment::calculationIncomeTax() {
 	incomeTax = salary * 0.13;
 } // Функция класса Payment отвечающая за расчет подоходного налога работника 
 
-char* toString(const Payment& person) {
-	char* stringObj = new char[strlen(person.name) 
-		+ sizeof(person.dailySalary)
-		+ sizeof(person.employmentYear) 
-		+ sizeof(person.workedDays) 
-		+ sizeof(person.salary) 
-		+ sizeof(person.pensionContributions)
-		+ sizeof(person.incomeTax) 
+char* Payment::toString() {
+	char* stringObj = new char[strlen(name) 
+		+ sizeof(dailySalary)
+		+ sizeof(employmentYear) 
+		+ sizeof(workedDays) 
+		+ sizeof(salary) 
+		+ sizeof(pensionContributions)
+		+ sizeof(incomeTax) 
 		+ 202];
 	sprintf(stringObj, "Данные сотрудника: '%s' \n Оклад: %d р. \n Год поступления на работу: %d \n Кол-во отработанных дней в месяце: %d \n Зарплата: %.2f р. \n Отчисления в пенсионный фонд: %.2f р. \n Подоходный налог: %.2f р. \n", 
-		person.name, 
-		person.dailySalary, 
-		person.employmentYear, 
-		person.workedDays, 
-		person.salary, 
-		person.pensionContributions, 
-		person.incomeTax);
+		name, dailySalary, employmentYear, workedDays, salary, pensionContributions, incomeTax);
 	return (stringObj);
 } // Функция класса Payment отвечающая за строковое представление объекта
 
@@ -205,26 +199,32 @@ ostream& operator << (ostream& out, const Payment& person) {
 istream& operator >> (istream& in, Payment& person) {
 	delete[] person.name;
 	person.name = new char[255];
-	in.getline(person.name, 255);
+	in.getline(person.name, 255, ';');
 	in >> person.dailySalary; 
 	in >> person.employmentYear; 
 	in >> person.workedDays;
 	return in;
 } // Перегруженная функция ввода комплексных чисел
 
+ofstream& operator << (ofstream& out, const Payment& person) {
+	out << person.name << "; " << person.dailySalary << " " << person.employmentYear << " " << person.workedDays;
+	return out;
+}
+
 void Payment::binarySave(ofstream& save) {
 	if (save.is_open()) {
 		save.write((char*)this, sizeof(*this));
-		save.close();
 	}
 }
 
 void Payment::binaryLoad(ifstream& load) {
-	delete[] name;
-	name = new char[255];
+	Payment result;
+	delete[] result.name;
+	result.name = new char[255];
 	if (load.is_open()) {
-		load.read((char*)this, sizeof(*this));
-		load.close();
+		load.read((char*)&result, sizeof(result));
+		*this = result;
+		result.name = NULL;
 	}
 }
 

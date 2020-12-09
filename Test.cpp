@@ -25,7 +25,7 @@ void testToString() {
 	test.calculationSalary();
 	test.calculationIncomeTax();
 	test.calculationPensionContributions();
-	assert(strcmp(toString(test), "Данные сотрудника: 'Тестевский Тест Тестович' \n Оклад: 5 р. \n Год поступления на работу: 1 \n Кол-во отработанных дней в месяце: 10 \n Зарплата: 50,00 р. \n Отчисления в пенсионный фонд: 0,50 р. \n Подоходный налог: 6,50 р. \n") == 0);
+	assert(strcmp(test.toString(), "Данные сотрудника: 'Тестевский Тест Тестович' \n Оклад: 5 р. \n Год поступления на работу: 1 \n Кол-во отработанных дней в месяце: 10 \n Зарплата: 50,00 р. \n Отчисления в пенсионный фонд: 0,50 р. \n Подоходный налог: 6,50 р. \n") == 0);
 }
 
 void testAddition() {
@@ -94,6 +94,108 @@ void testAssignment() {
 	assert(test == test5);
 }
 
+
+void testSaveLoad() {
+	Payment personForSave[5], personForLoad[5];
+	ofstream save("test.txt", ios_base::app);
+
+	personForSave[0] = Payment("Teschenko1 Test1 Testovich1", 1, 1, 1);
+	personForSave[0].calculationSalary();
+	personForSave[0].calculationPensionContributions();
+	personForSave[0].calculationIncomeTax();
+
+	personForSave[1] = Payment("Teschenko2 Test2 Testovich2", 2, 2, 2);
+	personForSave[1].calculationSalary();
+	personForSave[1].calculationPensionContributions();
+	personForSave[1].calculationIncomeTax();
+
+	personForSave[2] = Payment("Teschenko3 Test3 Testovich3", 3, 3, 3);
+	personForSave[2].calculationSalary();
+	personForSave[2].calculationPensionContributions();
+	personForSave[2].calculationIncomeTax();
+
+	personForSave[3] = Payment("Teschenko4 Test4 Testovich4", 4, 4, 4);
+	personForSave[3].calculationSalary();
+	personForSave[3].calculationPensionContributions();
+	personForSave[3].calculationIncomeTax();
+
+	personForSave[4] = Payment("Teschenko5 Test5 Testovich5", 5, 5, 5);
+	personForSave[4].calculationSalary();
+	personForSave[4].calculationPensionContributions();
+	personForSave[4].calculationIncomeTax();
+
+	if (save.is_open()) {
+		for (int i = 0; i < 5; i++) {
+			save << personForSave[i];
+		}
+		save.close();
+	}
+
+	ifstream load("test.txt", ios_base::in);
+	if (load.is_open()) {
+		for (int i = 0; i < 5; i++) {
+			load >> personForLoad[i];
+			personForLoad[i].calculationSalary();
+			personForLoad[i].calculationPensionContributions();
+			personForLoad[i].calculationIncomeTax();
+			assert(personForLoad[i] == personForSave[i]);
+		}
+		load.close();
+	}
+
+	fstream clearFile("test.txt", ios::out);
+	clearFile.close();
+}
+
+void testSaveLoadBinary() {
+	Payment personForSave[5], personForLoad[5];
+	ofstream saveB("testBinary.txt", ios_base::binary);
+
+	personForSave[0] = Payment("Teschenko1 Test1 Testovich1", 1, 1, 1);
+	personForSave[0].calculationSalary();
+	personForSave[0].calculationPensionContributions();
+	personForSave[0].calculationIncomeTax();
+
+	personForSave[1] = Payment("Teschenko2 Test2 Testovich2", 2, 2, 2);
+	personForSave[1].calculationSalary();
+	personForSave[1].calculationPensionContributions();
+	personForSave[1].calculationIncomeTax();
+
+	personForSave[2] = Payment("Teschenko3 Test3 Testovich3", 3, 3, 3);
+	personForSave[2].calculationSalary();
+	personForSave[2].calculationPensionContributions();
+	personForSave[2].calculationIncomeTax();
+
+	personForSave[3] = Payment("Teschenko4 Test4 Testovich4", 4, 4, 4);
+	personForSave[3].calculationSalary();
+	personForSave[3].calculationPensionContributions();
+	personForSave[3].calculationIncomeTax();
+
+	personForSave[4] = Payment("Teschenko5 Test5 Testovich5", 5, 5, 5);
+	personForSave[4].calculationSalary();
+	personForSave[4].calculationPensionContributions();
+	personForSave[4].calculationIncomeTax();
+	
+	if (saveB.is_open()) {
+		for (int i = 0; i < 5; i++) {
+			personForSave[i].binarySave(saveB);
+		}
+		saveB.close();
+	}
+
+	ifstream loadB("testBinary.txt", ios_base::binary);
+	if (loadB.is_open()) {
+		for (int i = 0; i < 5; i++) {
+			personForLoad[i].binaryLoad(loadB);
+			assert(personForLoad[i] == personForSave[i]);
+		}
+		loadB.close();
+	}
+
+	fstream clearFileB("testBinary.txt", ios::out);
+	clearFileB.close();
+}
+
 void allTests() {
 	testSalary();
 	testPensionContributions();
@@ -106,4 +208,7 @@ void allTests() {
 	testDecrement();
 	testFinalSalary();
 	testAssignment();
+
+	testSaveLoad();
+	testSaveLoadBinary();
 }

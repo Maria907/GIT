@@ -12,4 +12,7 @@ void testDecrement();
 void testFinalSalary();
 void testAssignment();
 
+void testSaveLoad();
+void testSaveLoadBinary();
+
 void allTests();
