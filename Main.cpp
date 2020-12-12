@@ -1,16 +1,16 @@
 ﻿#include "Payment.h"
 #include "PaymentWorked.h"
-#include "PaymentСompany.h"
+#include "PaymentCompany.h"
 
 int main() {
 	setlocale(LC_ALL, "Russian");
 
-	PaymentСompany person1("Olegchenko Oleg Olegovich", 300, 2015, 22, "barista", 500, 23);
+	PaymentCompany person1("Olegchenko Oleg Olegovich", 300, 2015, 22, "barista", 500, 23);
 	person1.calculationSalary();
 	person1.calculationPensionContributions();
 	person1.calculationIncomeTax();
 
-	PaymentСompany person2;
+	PaymentCompany person2;
 	person2 = person1;
 	person2.calculationSalary();
 	person2.calculationPensionContributions();

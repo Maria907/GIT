@@ -30,8 +30,6 @@ public:
 	void setAllowance(int valueAllowance);
 
 	void calculationSalary();
-	void calculationPensionContributions();
-	void calculationIncomeTax();
 
 	friend bool operator == (PaymentWorked& person1, PaymentWorked& person2);
 	friend bool operator != (PaymentWorked& person1, PaymentWorked& person2);

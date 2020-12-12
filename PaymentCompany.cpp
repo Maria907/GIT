@@ -1,49 +1,41 @@
 ﻿#include "Payment.h"
-#include "PaymentСompany.h"
+#include "PaymentCompany.h"
 
-PaymentСompany::~PaymentСompany() {
+PaymentCompany::~PaymentCompany() {
 	delete profession;
 }
 
-char* PaymentСompany::getProfession() {
+char* PaymentCompany::getProfession() {
 	return profession;
 }
 
-int PaymentСompany::getHourlyPay() {
+int PaymentCompany::getHourlyPay() {
 	return hourlyPay;
 }
 
-int PaymentСompany::getWorkingHours() {
+int PaymentCompany::getWorkingHours() {
 	return workingHours;
 }
 
-void PaymentСompany::setProfession(const char* valueProfession) {
+void PaymentCompany::setProfession(const char* valueProfession) {
 	delete profession;
 	profession = new char[strlen(valueProfession) + 1];
 	strcpy(profession, valueProfession);
 }
 
-void PaymentСompany::setHourlyPay(int valueHourlyPay) {
+void PaymentCompany::setHourlyPay(int valueHourlyPay) {
 	hourlyPay = valueHourlyPay;
 }
 
-void PaymentСompany::setWorkingHours(int valueWorkingHours) {
+void PaymentCompany::setWorkingHours(int valueWorkingHours) {
 	workingHours = valueWorkingHours;
 }
 
-void PaymentСompany::calculationSalary() {
+void PaymentCompany::calculationSalary() {
 	salary = hourlyPay * workingHours;	
 }
 
-void PaymentСompany::calculationPensionContributions() {
-	Payment::calculationPensionContributions();
-}
-
-void PaymentСompany::calculationIncomeTax() {
-	Payment::calculationIncomeTax();
-}
-
-bool operator == (PaymentСompany& person1, PaymentСompany& person2) {
+bool operator == (PaymentCompany& person1, PaymentCompany& person2) {
 	return (strcmp(person1.name, person2.name) == 0
 		&& person1.dailySalary == person2.dailySalary
 		&& person1.employmentYear == person2.employmentYear
@@ -56,11 +48,11 @@ bool operator == (PaymentСompany& person1, PaymentСompany& person2) {
 		&& person1.workingHours == person2.workingHours);
 }
 
-bool operator != (PaymentСompany& person1, PaymentСompany& person2) {
+bool operator != (PaymentCompany& person1, PaymentCompany& person2) {
 	return !(person1 == person2);
 }
 
-PaymentСompany PaymentСompany::operator = (const PaymentСompany& person) {
+PaymentCompany PaymentCompany::operator = (const PaymentCompany& person) {
 	if (strcmp(name, person.name) != 0) {
 		delete[] name;
 		name = new char[strlen(person.name) + 1];
@@ -83,7 +75,7 @@ PaymentСompany PaymentСompany::operator = (const PaymentСompany& person) {
 	return *this;
 }
 
-ostream& operator << (ostream& out, const PaymentСompany& person) {
+ostream& operator << (ostream& out, const PaymentCompany& person) {
 	out << "Данные сотрудника: " << person.name << endl
 		<< " Год поступления на работу: " << person.employmentYear << endl
 		<< " Зарплата: " << person.salary << " р." << endl
@@ -96,7 +88,7 @@ ostream& operator << (ostream& out, const PaymentСompany& person) {
 }
 
 
-istream& operator >> (istream& in, PaymentСompany& person) {
+istream& operator >> (istream& in, PaymentCompany& person) {
 	delete[] person.name;
 	person.name = new char[255];
 	in.getline(person.name, 255, ';');
@@ -111,12 +103,12 @@ istream& operator >> (istream& in, PaymentСompany& person) {
 	return in;
 }
 
-ofstream& operator << (ofstream& out, const PaymentСompany& person) {
+ofstream& operator << (ofstream& out, const PaymentCompany& person) {
 	out << person.name << "; " << person.dailySalary << " " << person.employmentYear << " " << person.workedDays << person.profession << "; " << person.hourlyPay << " " << person.workingHours;
 	return out;
 }
 
-char* PaymentСompany::toString() {
+char* PaymentCompany::toString() {
 	char* stringObj = new char[strlen(name)
 		+ strlen(profession)
 		+ sizeof(employmentYear)
@@ -131,14 +123,14 @@ char* PaymentСompany::toString() {
 	return (stringObj);
 }
 
-void PaymentСompany::binarySave(ofstream& save) {
+void PaymentCompany::binarySave(ofstream& save) {
 	if (save.is_open()) {
 		save.write((char*)this, sizeof(*this));
 	}
 }
 
-void PaymentСompany::binaryLoad(ifstream& load) {
-	PaymentСompany result;
+void PaymentCompany::binaryLoad(ifstream& load) {
+	PaymentCompany result;
 	delete[] result.name;
 	delete[] result.profession;
 	result.name = new char[255];

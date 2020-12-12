@@ -1,6 +1,6 @@
 ﻿#include "Payment.h"
 #include "PaymentWorked.h"
-#include "PaymentСompany.h"
+#include "PaymentCompany.h"
 
 void testSalary() {
 	Payment test("Тестевский Тест Тестович", 5, 1, 10);
@@ -342,37 +342,37 @@ void testSaveLoadBinaryWorked() {
 	clearFileB.close();
 }
 
-void testSalaryСompany() {
-	PaymentСompany test("Тестевский Тест Тестович", 5, 1, 10, "Тест", 500, 5);
+void testSalaryCompany() {
+	PaymentCompany test("Тестевский Тест Тестович", 5, 1, 10, "Тест", 500, 5);
 	test.calculationSalary();
 	assert(test.getSalary() == test.getHourlyPay() * test.getWorkingHours());
 }
 
-void testToStringyСompany() {
-	PaymentСompany test("Тестевский Тест Тестович", 5, 1, 10, "Тест", 500, 5);
+void testToStringyCompany() {
+	PaymentCompany test("Тестевский Тест Тестович", 5, 1, 10, "Тест", 500, 5);
 	test.calculationSalary();
 	test.calculationIncomeTax();
 	test.calculationPensionContributions();
 	assert(strcmp(test.toString(), "Данные сотрудника: 'Тестевский Тест Тестович' \n Год поступления на работу: 1 \n Зарплата: 2500,00 р. \n Отчисления в пенсионный фонд: 25,00 р. \n Подоходный налог: 325,00 р. \n Должность: 'Тест' \n Плата за час: 500 р. \n Количество отработанных часов в месяце: 5 \n") == 0);
 }
 
-void testAssignmentyСompany() {
-	PaymentСompany test("Тестевский Тест Тестович", 1, 1, 1, "Тест", 1, 1);
+void testAssignmentyCompany() {
+	PaymentCompany test("Тестевский Тест Тестович", 1, 1, 1, "Тест", 1, 1);
 	test.calculationSalary();
 	test.calculationIncomeTax();
 	test.calculationPensionContributions();
-	PaymentСompany test2("Тестевский2 Тест2 Тестович2", 2, 2, 2, "Тест2", 2, 2);
+	PaymentCompany test2("Тестевский2 Тест2 Тестович2", 2, 2, 2, "Тест2", 2, 2);
 	test2.calculationSalary();
 	test2.calculationIncomeTax();
 	test2.calculationPensionContributions();
 	test2 = test;
 	assert(test2 == test);
 
-	PaymentСompany test3("Тестевский3 Тест3 Тестович3", 3, 3, 3, "Тест3", 3, 3);
+	PaymentCompany test3("Тестевский3 Тест3 Тестович3", 3, 3, 3, "Тест3", 3, 3);
 	test3.calculationSalary();
 	test3.calculationIncomeTax();
 	test3.calculationPensionContributions();
-	PaymentСompany test4("Тестевский4 Тест4 Тестович4", 4, 4, 4, "Тест3", 4, 4);
+	PaymentCompany test4("Тестевский4 Тест4 Тестович4", 4, 4, 4, "Тест3", 4, 4);
 	test4.calculationSalary();
 	test4.calculationIncomeTax();
 	test4.calculationPensionContributions();
@@ -380,36 +380,36 @@ void testAssignmentyСompany() {
 	assert(test3 == test);
 	assert(test4 == test3);
 
-	PaymentСompany test5(test);
+	PaymentCompany test5(test);
 	test = test;
 	assert(test == test5);
 }
 
-void testSaveLoadyСompany() {
-	PaymentСompany personForSave[5], personForLoad[5];
+void testSaveLoadyCompany() {
+	PaymentCompany personForSave[5], personForLoad[5];
 	ofstream save("test.txt", ios_base::app);
 
-	personForSave[0] = PaymentСompany("Teschenko1 Test1 Testovich1", 1, 1, 1, "Test1", 1, 1);
+	personForSave[0] = PaymentCompany("Teschenko1 Test1 Testovich1", 1, 1, 1, "Test1", 1, 1);
 	personForSave[0].calculationSalary();
 	personForSave[0].calculationPensionContributions();
 	personForSave[0].calculationIncomeTax();
 
-	personForSave[1] = PaymentСompany("Teschenko2 Test2 Testovich2", 2, 2, 2, "Test2", 2, 2);
+	personForSave[1] = PaymentCompany("Teschenko2 Test2 Testovich2", 2, 2, 2, "Test2", 2, 2);
 	personForSave[1].calculationSalary();
 	personForSave[1].calculationPensionContributions();
 	personForSave[1].calculationIncomeTax();
 
-	personForSave[2] = PaymentСompany("Teschenko3 Test3 Testovich3", 3, 3, 3, "Test3", 3, 3);
+	personForSave[2] = PaymentCompany("Teschenko3 Test3 Testovich3", 3, 3, 3, "Test3", 3, 3);
 	personForSave[2].calculationSalary();
 	personForSave[2].calculationPensionContributions();
 	personForSave[2].calculationIncomeTax();
 
-	personForSave[3] = PaymentСompany("Teschenko4 Test4 Testovich4", 4, 4, 4, "Test4", 4, 4);
+	personForSave[3] = PaymentCompany("Teschenko4 Test4 Testovich4", 4, 4, 4, "Test4", 4, 4);
 	personForSave[3].calculationSalary();
 	personForSave[3].calculationPensionContributions();
 	personForSave[3].calculationIncomeTax();
 
-	personForSave[4] = PaymentСompany("Teschenko5 Test5 Testovich5", 5, 5, 5, "Test5", 5, 5);
+	personForSave[4] = PaymentCompany("Teschenko5 Test5 Testovich5", 5, 5, 5, "Test5", 5, 5);
 	personForSave[4].calculationSalary();
 	personForSave[4].calculationPensionContributions();
 	personForSave[4].calculationIncomeTax();
@@ -437,31 +437,31 @@ void testSaveLoadyСompany() {
 	clearFile.close();
 }
 
-void testSaveLoadBinaryСompany() {
-	PaymentСompany personForSave[5], personForLoad[5];
+void testSaveLoadBinaryCompany() {
+	PaymentCompany personForSave[5], personForLoad[5];
 	ofstream saveB("testBinary.txt", ios_base::binary);
 
-	personForSave[0] = PaymentСompany("Teschenko1 Test1 Testovich1", 1, 1, 1, "Test1", 1, 1);
+	personForSave[0] = PaymentCompany("Teschenko1 Test1 Testovich1", 1, 1, 1, "Test1", 1, 1);
 	personForSave[0].calculationSalary();
 	personForSave[0].calculationPensionContributions();
 	personForSave[0].calculationIncomeTax();
 
-	personForSave[1] = PaymentСompany("Teschenko2 Test2 Testovich2", 2, 2, 2, "Test2", 2, 2);
+	personForSave[1] = PaymentCompany("Teschenko2 Test2 Testovich2", 2, 2, 2, "Test2", 2, 2);
 	personForSave[1].calculationSalary();
 	personForSave[1].calculationPensionContributions();
 	personForSave[1].calculationIncomeTax();
 
-	personForSave[2] = PaymentСompany("Teschenko3 Test3 Testovich3", 3, 3, 3, "Test3", 3, 3);
+	personForSave[2] = PaymentCompany("Teschenko3 Test3 Testovich3", 3, 3, 3, "Test3", 3, 3);
 	personForSave[2].calculationSalary();
 	personForSave[2].calculationPensionContributions();
 	personForSave[2].calculationIncomeTax();
 
-	personForSave[3] = PaymentСompany("Teschenko4 Test4 Testovich4", 4, 4, 4, "Test4", 4, 4);
+	personForSave[3] = PaymentCompany("Teschenko4 Test4 Testovich4", 4, 4, 4, "Test4", 4, 4);
 	personForSave[3].calculationSalary();
 	personForSave[3].calculationPensionContributions();
 	personForSave[3].calculationIncomeTax();
 
-	personForSave[4] = PaymentСompany("Teschenko5 Test5 Testovich5", 5, 5, 5, "Test5", 5, 5);
+	personForSave[4] = PaymentCompany("Teschenko5 Test5 Testovich5", 5, 5, 5, "Test5", 5, 5);
 	personForSave[4].calculationSalary();
 	personForSave[4].calculationPensionContributions();
 	personForSave[4].calculationIncomeTax();
@@ -507,9 +507,9 @@ void allTests() {
 	testAssignmentyWorked();
 	testSaveLoadyWorked();
 	testSaveLoadBinaryWorked();
-	testSalaryСompany();
-	testToStringyСompany();
-	testAssignmentyСompany();
-	testSaveLoadyСompany();
-	testSaveLoadBinaryСompany();
+	testSalaryCompany();
+	testToStringyCompany();
+	testAssignmentyCompany();
+	testSaveLoadyCompany();
+	testSaveLoadBinaryCompany();
 }

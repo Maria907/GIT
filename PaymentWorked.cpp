@@ -27,14 +27,6 @@ void PaymentWorked::calculationSalary() {
 	salary = (dailySalary + allowance) * workedDays;
 }
 
-void PaymentWorked::calculationPensionContributions() {
-	Payment::calculationPensionContributions();
-}
-
-void PaymentWorked::calculationIncomeTax() {
-	Payment::calculationIncomeTax();
-}
-
 bool operator == (PaymentWorked& person1, PaymentWorked& person2) {
 	return (strcmp(person1.name, person2.name) == 0
 		&& person1.dailySalary == person2.dailySalary

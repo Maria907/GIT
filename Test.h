@@ -20,10 +20,10 @@ void testToStringyWorked();
 void testAssignmentyWorked();
 void testSaveLoadyWorked();
 void testSaveLoadBinaryWorked();
-void testSalary—ompany();
-void testToStringy—ompany();
-void testAssignmenty—ompany();
-void testSaveLoady—ompany();
-void testSaveLoadBinary—ompany();
+void testSalaryCompany();
+void testToStringyCompany();
+void testAssignmentyCompany();
+void testSaveLoadyCompany();
+void testSaveLoadBinaryCompany();
 
 void allTests();
