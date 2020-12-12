@@ -229,5 +229,3 @@ void Payment::binaryLoad(ifstream& load) {
 }
 
 int Payment::counter = 0; // Инициализация статического члена класса 
-
-

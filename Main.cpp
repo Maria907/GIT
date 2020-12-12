@@ -1,46 +1,37 @@
 ﻿#include "Payment.h"
+#include "PaymentWorked.h"
+#include "PaymentСompany.h"
 
 int main() {
 	setlocale(LC_ALL, "Russian");
 
-	Payment person1("Olegchenko Oleg Olegovich", 300, 2015, 22);
-    Payment person2;
-    person1.calculationSalary();
-    person1.calculationPensionContributions();
-    person1.calculationIncomeTax();
+	PaymentСompany person1("Olegchenko Oleg Olegovich", 300, 2015, 22, "barista", 500, 23);
+	person1.calculationSalary();
+	person1.calculationPensionContributions();
+	person1.calculationIncomeTax();
 
+	PaymentСompany person2;
+	person2 = person1;
+	person2.calculationSalary();
+	person2.calculationPensionContributions();
+	person2.calculationIncomeTax();
 
-    ofstream save("text.txt", ios_base::app);
-    if (save.is_open()) {
-        save << person1;
-        save.close();
-    }
+	cout << person1 << endl;
+	cout << person2 << endl;
+	
+	PaymentWorked person3("Olegchenko Oleg Olegovich", 300, 2015, 22, "barista", 500);
+	person1.calculationSalary();
+	person1.calculationPensionContributions();
+	person1.calculationIncomeTax();
 
-    ifstream load("text.txt", ios_base::in);
-    if (load.is_open()) {
-        load >> person2;
-        load.close();
-    }
+	PaymentWorked person4;
+	person4 = person3;
+	person2.calculationSalary();
+	person2.calculationPensionContributions();
+	person2.calculationIncomeTax();
 
-    person2.calculationSalary();
-    person2.calculationPensionContributions();
-    person2.calculationIncomeTax();
-    cout << person2 << endl;
-
-    ofstream saveB("bText.txt", ios_base::binary);
-    person1.binarySave(saveB);
-    saveB.close();
-
-    ifstream loadB("bText.txt", ios_base::binary);
-    person2.binaryLoad(loadB);
-    loadB.close();
-    cout << person2 << endl;
-
-    fstream clearFile("text.txt", ios::out);
-    clearFile.close();
-
-    fstream clearFileB("bText.txt", ios::out);
-    clearFileB.close();
+	cout << person3 << endl;
+	cout << person4 << endl;
 
 	allTests();
 

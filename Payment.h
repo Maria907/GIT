@@ -45,7 +45,7 @@ public:
 	friend bool operator == (Payment& person1, Payment& person2);
 	friend bool operator != (Payment& person1, Payment& person2);
 
-	Payment operator = (const Payment&);
+	Payment operator = (const Payment& person);
 
 	char* operator() ();
 
@@ -59,7 +59,7 @@ public:
 	void binarySave(ofstream& save);
 	void binaryLoad(ifstream& load);
 
-private:
+protected:
 	char* name; // Объявление переменной, содержащей ФИО работника
 	int dailySalary; // Объявление переменной, содержащей оклад работника
 	int employmentYear; // Объявление переменной, содержащей год принятия работника 
@@ -68,4 +68,3 @@ private:
 	float pensionContributions; // Объявление переменной, содержащей пенсионный вычет работника
 	float incomeTax; // Объявление переменной, содержащей подоходный налог работника
 }; // Объявление класса Payment
-
